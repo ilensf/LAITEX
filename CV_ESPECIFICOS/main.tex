@@ -1,0 +1,162 @@
+%-------------------------
+% Resume in Latex
+% Author : Ismael Lens Fraga (Versión ATS - Desarrollador Full Stack)
+%------------------------
+
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[spanish]{babel}
+\usepackage{tabularx}
+\usepackage{charter}
+\usepackage[T1]{fontenc}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\footskip}{5pt}
+
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.4in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Títulos de sección
+\titleformat{\section}{
+  \vspace{10pt}\bfseries\raggedright\Large
+}{}{0em}{}
+
+\newcommand{\resumeItem}[1]{
+  \item\small{{#1 \vspace{-1pt}}}
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{4pt}\item
+    #1, \textit{\small #2} -- \textit{\small #4} \\
+    \textit{\small#3}
+    \vspace{-4pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \small#1 -- #2
+    \vspace{-4pt}
+}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}, itemsep=10pt, parsep=4pt]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.2in, itemsep=4pt, parsep=2pt]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-2pt}}
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    \textbf{\Huge \scshape Ismael Lens Fraga} \\ \vspace{4pt}
+    \small \textbf{\Large Desarrollador Full Stack $|$ JavaScript, Java \& Python} \\ \vspace{4pt}
+    \footnotesize Lugo / A Coruña, España $|$ +34 681 31 38 81 $|$ \href{mailto:ismaellens@hotmail.com}{ismaellens@hotmail.com} $|$
+    \href{https://linkedin.com/in/ismaellens}{linkedin.com/in/ismaellens} $|$
+    \href{https://github.com/ismaellens}{github.com/ismaellens}
+\end{center}
+
+%-----------PERFIL PROFESIONAL-----------
+\section{Perfil Profesional}
+\small{Desarrollador de software full-stack con formación técnica en Desarrollo de Aplicaciones Web (DAW) y especialización continua en IA y datos. Sólidas competencias en el ciclo completo de desarrollo web, combinando la implementación de interfaces de usuario atractivas y funcionales (HTML5, CSS3, JavaScript) con la lógica de negocio back-end (Java, Node.js, Python), diseño de APIs REST y bases de datos relacionales. Experiencia trabajando con metodologías ágiles por sprints, control de versiones con Git, revisiones de código y redacción de documentación técnica. Profesional con alta atención al detalle, capacidad resolutiva y de trabajo en equipo, enfocado en la mejora continua y el rendimiento de soluciones tecnológicas.}
+
+%-----------FORMACIÓN ACADÉMICA-----------
+\section{Formación Académica}
+  \resumeSubHeadingListStart
+   \resumeSubheading
+      {IES Fernando Wirtz Suárez (FP Dual en colaboración con NTT DATA)}{España}
+      {Máster de Especialización en Inteligencia Artificial y Big Data}{Actualidad}
+      \resumeItemListStart
+        \resumeItem{Especialización en arquitecturas avanzadas de datos, optimización de algoritmos, automatización y gobierno de la información.}
+      \resumeItemListEnd
+   \resumeSubheading
+      {IES San Clemente}{España}
+      {Técnico Superior en Desarrollo de Aplicaciones Web (DAW)}{2022 -- 2025}
+      \resumeItemListStart
+        \resumeItem{Formación integral en desarrollo front-end (HTML, CSS, JavaScript) y back-end (Java, persistencia y acceso a bases de datos), integración de APIs y diseño de software modular.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------EXPERIENCIA PROFESIONAL-----------
+\section{Experiencia Profesional}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Impulsa Dixital}{España}
+      {Desarrollador de Software (Prácticas DAW)}{Sep. 2025 -- Dic. 2025}
+      \resumeItemListStart
+        \resumeItem{Desarrollo y mantenimiento de arquitecturas web full-stack modulares, integrando servicios de back-end desacoplados e interfaces interactivas preparadas para flujos de automatización.}
+        \resumeItem{Diseño, integración y optimización de APIs REST y contratos de servicios estructurados para interoperabilidad eficiente entre clientes, servicios autónomos y bases de datos.}
+        \resumeItem{Diagnóstico y resolución de incidencias complejas, optimización de latencia en servicios y aplicación rigurosa de buenas prácticas de ingeniería, testing automatizado y documentación técnica.}
+        \resumeItem{Gestión del ciclo de vida del software con Git (code reviews, branching strategies y pull requests) dentro de marcos ágiles orientados a iteraciones rápidas y entregas continuas.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Operaciones, Logística y Entorno de Negocio}{España}
+      {Múltiples empresas (Ágora, Jevaso, Valcarce...)}{2022 -- 2026}
+      \resumeItemListStart
+        \resumeItem{Coordinación operativa en entornos colaborativos y de alta exigencia, gestionando prioridades técnicas con autonomía, rigor analítico y enfoque en resolución de problemas.}
+        \resumeItem{Análisis y rediseño de procesos operativos para identificar cuellos de botella, traduciendo especificaciones de negocio complejas en soluciones sistemáticas y fiables.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------PROYECTOS DESTACADOS-----------
+\section{Proyectos Destacados}
+\resumeSubHeadingListStart
+    \resumeProjectHeading
+        {Peliculon-es — Aplicación Web y Consumo de APIs $|$ \emph{JavaScript, HTML, CSS, API REST}}{2026}
+        \resumeItemListStart
+          \resumeItem{Desarrollo de aplicación web orientada al consumo asíncrono de servicios externos, orquestando peticiones concurrentes y procesando respuestas estructuradas en tiempo real.}
+          \resumeItem{Implementación de pipelines de datos en cliente para filtrado dinámico, transformación de payloads complejos y renderizado reactivo de alta eficiencia.}
+          \resumeItem{Arquitectura de control de estados, resiliencia en manejo de excepciones HTTP y optimización integral de la experiencia interactiva multidispositivo.}
+        \resumeItemListEnd
+    \resumeProjectHeading
+        {Galentreno — Plataforma Full Stack y Persistencia $|$ \emph{Node.js, PostgreSQL, JavaScript, Docker}}{2026}
+        \resumeItemListStart
+          \resumeItem{Diseño e implementación de una solución full-stack orientada a servicios, estructurando la lógica de negocio en Node.js mediante endpoints modulares y flujos desacoplados.}
+          \resumeItem{Modelado de datos y administración en PostgreSQL, optimizando esquemas relacionales, indexación y consultas para flujos de alta consistencia e integridad transaccional.}
+          \resumeItem{Implementación de pruebas automatizadas, documentación exhaustiva de arquitectura y empaquetado reproducible de entornos de ejecución mediante contenedores Docker.}
+        \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------HABILIDADES TÉCNICAS-----------
+\section{Habilidades y Tecnologías}
+ \begin{itemize}[leftmargin=0.15in, label={}, itemsep=6pt, topsep=4pt]
+    \small{\item{
+     \textbf{Desarrollo Front-end:} HTML5, CSS3, JavaScript (ES6+), diseño responsivo, maquetación web, consumo de APIs. \\ \vspace{2pt}
+     \textbf{Desarrollo Back-end \& APIs:} Java, Node.js, Python, diseño y optimización de APIs REST, lógica de negocio, manejo de sesiones y autenticación. \\ \vspace{2pt}
+     \textbf{Bases de Datos:} PostgreSQL, MySQL, diseño relacional, integridad referencial y optimización de consultas SQL. \\ \vspace{2pt}
+     \textbf{Control de Versiones y Metodologías:} Git (ramas, pull requests, revisión de código), metodologías ágiles (Scrum, planificación de sprints), pruebas de software, documentación y Docker. \\ \vspace{2pt}
+     \textbf{Habilidades Profesionales:} Comunicación efectiva, trabajo en equipo, capacidad analítica, gestión del tiempo y calidad del software.
+    }}
+ \end{itemize}
+
+%-----------IDIOMAS-----------
+\section{Idiomas}
+ \begin{itemize}[leftmargin=0.15in, label={}, itemsep=6pt, topsep=4pt]
+    \small{\item{
+     Español (Nativo), Gallego (Nativo), Inglés (Avanzado - Competencia profesional para documentación técnica y especificaciones de software).
+    }}
+ \end{itemize}
+
+\end{document}

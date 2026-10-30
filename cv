@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+project_dir="$(dirname -- "$(readlink -f -- "$0")")"
+streamlit="$project_dir/.venv/bin/streamlit"
+server_port=8501
+args=("$@")
+
+for ((index = 0; index < ${#args[@]}; index++)); do
+    case "${args[index]}" in
+        --server.port)
+            if ((index + 1 < ${#args[@]})); then
+                server_port="${args[index + 1]}"
+            fi
+            ;;
+        --server.port=*)
+            server_port="${args[index]#*=}"
+            ;;
+    esac
+done
+
+"$streamlit" run "$project_dir/app.py" \
+    --server.port "$server_port" \
+    "${args[@]}" \
+    --server.headless true &
+server_pid=$!
+
+cleanup() {
+    kill "$server_pid" 2>/dev/null || true
+    wait "$server_pid" 2>/dev/null || true
+}
+trap cleanup EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
+
+app_url="http://localhost:$server_port"
+for ((attempt = 0; attempt < 60; attempt++)); do
+    if curl --fail --silent "$app_url/_stcore/health" >/dev/null; then
+        break
+    fi
+    if ! kill -0 "$server_pid" 2>/dev/null; then
+        wait "$server_pid" || exit $?
+        exit 1
+    fi
+    sleep 0.5
+done
+
+if ! curl --fail --silent "$app_url/_stcore/health" >/dev/null; then
+    echo "Streamlit did not become ready at $app_url within 30 seconds." >&2
+    exit 1
+fi
+
+default_browser="$(xdg-settings get default-web-browser 2>/dev/null || true)"
+case "$default_browser" in
+    *brave*)
+        browser=brave-browser
+        ;;
+    *firefox*)
+        browser=firefox
+        ;;
+    *chromium*)
+        browser=chromium
+        ;;
+    *)
+        browser=
+        ;;
+esac
+
+if [[ -n "$browser" ]] && command -v "$browser" >/dev/null 2>&1; then
+    "$browser" --new-tab "$app_url" >/dev/null 2>&1 &
+else
+    xdg-open "$app_url" >/dev/null 2>&1 &
+fi
+
+wait "$server_pid"
