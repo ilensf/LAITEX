@@ -1,12 +1,12 @@
 # Overleaf CV Tailoring Agent
 
 Aplicación web con Streamlit que adapta un currículum en LaTeX a una oferta de
-trabajo. Usa Gemini para reescribir viñetas de experiencia existentes, conserva
+trabajo. Usa Gemini para reescribir CVs existentes, conserva
 el resto del archivo y compila el resultado a PDF con `pdflatex`. No está
 diseñada para inventar experiencia laboral.
 
 La aplicación puede obtener la descripción desde una URL o usar el texto que
-pegues manualmente si el sitio no permite el acceso automático. Antes de
+pegues manualmente si el sitio no permite el acceso automático(Como por ejemplo, LinkedIn). Antes de
 modificar `main.tex`, guarda una copia de respaldo; si falla la compilación,
 restaura el archivo original.
 
