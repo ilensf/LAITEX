@@ -1,1 +1,14 @@
-.env
+.env*
+!.env.example
+
+.venv/
+.vscode/
+__pycache__/
+*.py[cod]
+
+# LaTeX build artifacts and generated CV PDFs
+*.aux
+*.log
+*.out
+/CV_ESPECIFICOS/main.pdf
+/CV_ESPECIFICOS/CV_ATS_*.pdf

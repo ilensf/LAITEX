@@ -1,5 +1,6 @@
 beautifulsoup4
 google-genai
+groq
 httpx
 pydantic
 python-dotenv
