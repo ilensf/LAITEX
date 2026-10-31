@@ -1,0 +1,6 @@
+beautifulsoup4
+google-genai
+httpx
+pydantic
+python-dotenv
+streamlit

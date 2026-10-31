@@ -1,34 +1,28 @@
 import os
-import json
 import re
 import shutil
 import subprocess
 from pathlib import Path
+
 import bs4
 import httpx
 import streamlit as st
+from dotenv import load_dotenv
+from pydantic import BaseModel, Field
 from google import genai
 from google.genai import errors
 
+# 1. Sustituido el parseo manual por python-dotenv (más seguro para producción)
+load_dotenv()
 
-def load_dotenv_file(path=Path(".env")):
-    if not path.is_file():
-        return
-    for line in path.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if not line or line.startswith("#"):
-            continue
-        if line.startswith("export "):
-            line = line[7:].lstrip()
-        key, separator, value = line.partition("=")
-        if separator and key.strip():
-            value = value.strip()
-            if len(value) >= 2 and value[0] == value[-1] and value[0] in "\"'":
-                value = value[1:-1]
-            os.environ.setdefault(key.strip(), value)
+# 2. Esquemas de Pydantic para forzar a Gemini a devolver una estructura estricta
+class TailoredBullet(BaseModel):
+    id: int = Field(description="El ID exacto de la viñeta original.")
+    tailored_text: str = Field(description="El nuevo texto adaptado en LaTeX, incluyendo \\item al principio.")
 
+class CVUpdate(BaseModel):
+    replacements: list[TailoredBullet]
 
-load_dotenv_file()
 
 st.title("Overleaf CV Tailoring Agent")
 
@@ -54,59 +48,71 @@ def scrape_job_description(url):
 
 def tailor_latex_cv(tex_content, job_description, progress):
     client = genai.Client(http_options={"timeout": 60_000})
+    
+    # 3. Extraemos las viñetas con Regex para no depender del "Exact Match" del LLM
+    # Busca \item seguido de cualquier cosa hasta el siguiente \item o \end{...}
+    bullet_pattern = re.compile(r"\\item\s+.*?(?=\s*\\item|\s*\\end\{)", re.DOTALL)
+    original_bullets = bullet_pattern.findall(tex_content)
+    
+    if not original_bullets:
+        raise ValueError("No se encontraron viñetas (\\item) en el currículum.")
+        
+    bullets_dict = {i: bullet for i, bullet in enumerate(original_bullets)}
+    bullets_list_str = "\n".join([f"ID {k}: {v.strip()}" for k, v in bullets_dict.items()])
+
     prompt = f"""
     You are an expert technical resume editor. 
     Analyze the Job Description and the LaTeX CV below. 
     
-    Your task is to rewrite ONLY the experience bullet points in the CV to better align with the job description keywords.
+    Your task is to rewrite ONLY the experience bullet points to better align with the job description keywords.
     
     CRITICAL RULES:
-    1. Return your response as a valid JSON object where keys are the EXACT original bullet points (\\item text) and values are the tailored replacement bullet points.
+    1. Review the EXTRACTED BULLETS below. Return ONLY the IDs of the experience bullet points you want to rewrite and their new text.
     2. Do NOT invent new job titles or fake experience. Reframe existing achievements.
     3. Ensure LaTeX special characters like %, $, &, #, _ are properly escaped.
-    4. Return ONLY valid JSON.
-    5. Projects must always be Galentreno and Peliculon-es, do not under any circumstances change them.
+    4. Projects must always be Galentreno and Peliculon-es, do not under any circumstances change them.
 
     --- JOB DESCRIPTION ---
     {job_description}
 
-    --- LATEX CV CONTENT ---
+    --- LATEX CV CONTENT (For Context) ---
     {tex_content}
+    
+    --- EXTRACTED BULLETS (Select IDs from here) ---
+    {bullets_list_str}
     """
 
     progress.write("Sending structured request to Gemini...")
+    
+    # 4. Pasamos el response_schema para garantizar que devuelve nuestro modelo Pydantic
     response = client.models.generate_content(
         model="gemini-3.8-flash",
         contents=prompt,
         config={
-            "response_mime_type": "application/json"
+            "response_mime_type": "application/json",
+            "response_schema": CVUpdate,
+            "temperature": 0.2
         }
     )
     
-    try:
-        if response.text is None:
-            raise ValueError("Gemini returned an empty response.")
-        replacements = json.loads(response.text)
-    except Exception as e:
-        raise ValueError(f"Failed to parse JSON response from Gemini: {e}")
+    if not response.parsed:
+        raise ValueError("Gemini failed to return a valid JSON matching the required schema.")
+        
+    updates = response.parsed.replacements # type: ignore
+    
+    # Mapeamos los IDs devueltos a los textos originales extraídos
+    replacements = {}
+    for update in updates:
+        if update.id in bullets_dict:
+            original_text = bullets_dict[update.id]
+            if original_text.strip() != update.tailored_text.strip():
+                replacements[original_text] = update.tailored_text
 
-    if not isinstance(replacements, dict) or not replacements:
-        raise ValueError("Gemini must return a non-empty JSON object of bullet replacements.")
-    if any(
-        not isinstance(original, str)
-        or not original.strip()
-        or not isinstance(tailored, str)
-        or not tailored.strip()
-        for original, tailored in replacements.items()
-    ):
-        raise ValueError("Gemini returned an invalid bullet replacement.")
+    if not replacements:
+        progress.write("No experience bullets were modified by the AI.")
+        return tex_content
 
-    missing = [original for original in replacements if original not in tex_content]
-    if missing:
-        raise ValueError("Gemini returned bullet text that does not exactly match the CV.")
-
-    # Replace against the original text in one pass so a replacement cannot be
-    # modified again by a later key in the response.
+    # Reemplazo seguro de una sola pasada ordenando de mayor a menor longitud
     pattern = re.compile("|".join(re.escape(key) for key in sorted(replacements, key=len, reverse=True)))
     return pattern.sub(lambda match: replacements[match.group(0)], tex_content)
 
@@ -215,17 +221,11 @@ if st.button("Tailor and Generate PDF"):
                         "A network request timed out. If the job site is blocking access, "
                         "paste the job description and try again."
                     )
-                except errors.ServerError as e:
+                except errors.APIError as e:
                     progress.update(
                         label="Gemini could not complete the request.", state="error"
                     )
-                    if e.code == 504:
-                        st.error(
-                            "Gemini timed out again while generating the CV. "
-                            "No partial output was saved. Please try again."
-                        )
-                    else:
-                        st.error(f"Gemini returned server error {e.code}: {e.message}")
+                    st.error(f"Gemini API error: {e}")
                 except Exception as e:
                     if backup_created and backup_tex.exists():
                         try:
