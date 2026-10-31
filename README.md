@@ -1,4 +1,4 @@
-# Overleaf CV Tailoring Agent
+# Agente para modificar CVs Overleaf
 
 Aplicación web con Streamlit que adapta un currículum LaTeX a una oferta de
 trabajo. Puedes elegir entre **Gemini** y **Groq (Llama 3)** para personalizar
