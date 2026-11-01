@@ -19,7 +19,7 @@ load_dotenv()
 
 class CVUpdate(BaseModel):
     company_name: str = Field(description="Name of the company offering the job position. If unknown, return 'UNK'.")
-    full_tailored_latex: str = Field(description="The complete, fully compilable LaTeX source code of the tailored (and translated if needed) CV. Must contain the entire document from \documentclass to \end{document}.")
+    full_tailored_latex: str = Field(description=r"The complete, fully compilable LaTeX source code of the tailored (and translated if needed) CV. Must contain the entire document from \documentclass to \end{document}.")
 
 st.title("Overleaf CV Tailoring Agent")
 
@@ -193,12 +193,12 @@ if run_gemini or run_groq:
     if not job_url_input and not job_description_input.strip():
         st.error("Enter a job URL or paste the job description.")
     else:
-        repo_path = Path(repo_dir_input)
+        repo_path = Path(repo_dir_input).expanduser()
+        if not repo_path.is_absolute():
+            repo_path = Path(__file__).resolve().parent / repo_path
+        repo_path = repo_path.resolve()
         main_tex = repo_path / "main.tex"
-        
-        repo_path.mkdir(parents=True, exist_ok=True)
-        
-        if not main_tex.exists():
+        if not main_tex.is_file():
             st.error(f"main.tex not found in {repo_path}")
         elif not shutil.which(compiler_choice):
             st.error(

@@ -85,7 +85,8 @@ python -m pip install -r requirements.txt
    El repositorio excluye ese archivo de Git.
 4. Coloca tu CV en una carpeta local con un archivo `main.tex`. La aplicación
    usa `./CV_ESPECIFICOS` de forma predeterminada; puedes cambiar la ruta desde
-   la interfaz.
+   la interfaz. Las rutas relativas se resuelven desde la carpeta del proyecto,
+   independientemente de dónde se haya ejecutado el comando `cv`.
 
 ## Ejecutar
 
@@ -101,6 +102,9 @@ términos inmutables y elige **Tailor with Gemini** o **Tailor with Groq**. La
 app realizará hasta tres intentos para generar y compilar el CV. Al terminar,
 el PDF se guarda en la carpeta del CV con el nombre basado en la empresa
 detectada.
+
+El atajo `cv` reutiliza la aplicación existente si ya está disponible en el
+puerto configurado, en lugar de iniciar una segunda instancia.
 
 ### Atajo opcional `cv` (Linux/macOS)
 
