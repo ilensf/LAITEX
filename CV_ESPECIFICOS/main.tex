@@ -1,6 +1,6 @@
 %-------------------------
 % Resume in Latex
-% Author : Ismael Lens Fraga (Versión ATS - Desarrollador Full Stack)
+% Author : Ismael Lens Fraga
 %------------------------
 
 \documentclass[a4paper,11pt]{article}
@@ -18,6 +18,7 @@
 \usepackage{tabularx}
 \usepackage{charter}
 \usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -37,7 +38,7 @@
 \raggedright
 \setlength{\tabcolsep}{0in}
 
-% Títulos de sección
+% Section Titles
 \titleformat{\section}{
   \vspace{10pt}\bfseries\raggedright\Large
 }{}{0em}{}
@@ -48,15 +49,17 @@
 
 \newcommand{\resumeSubheading}[4]{
   \vspace{4pt}\item
-    #1, \textit{\small #2} -- \textit{\small #4} \\
-    \textit{\small#3}
-    \vspace{-4pt}
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
 }
 
 \newcommand{\resumeProjectHeading}[2]{
     \item
-    \small#1 -- #2
-    \vspace{-4pt}
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
 }
 
 \renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
@@ -71,91 +74,87 @@
 %----------HEADING----------
 \begin{center}
     \textbf{\Huge \scshape Ismael Lens Fraga} \\ \vspace{4pt}
-    \small \textbf{\Large Desarrollador Full Stack $|$ IA & Big Data $|$ JavaScript, Java \& Python} \\ \vspace{4pt}
-    \footnotesizeA Coruña, España $|$ +34 681 31 38 81 $|$ \href{mailto:ismaellens@hotmail.com}{ismaellens@hotmail.com} $|$
+    \small \textbf{\Large Full Stack \& Data Developer} \\ \vspace{4pt}
+    \footnotesize A Coruña, España $|$ +34 681 31 38 81 $|$ \href{mailto:ismaellens@hotmail.com}{ismaellens@hotmail.com} $|$
     \href{https://linkedin.com/in/ismaellens}{linkedin.com/in/ismaellens} $|$
     \href{https://github.com/ilensf}{github.com/ilensf}
 \end{center}
 
-%-----------PERFIL PROFESIONAL-----------
+%-----------PROFESSIONAL PROFILE-----------
 \section{Perfil Profesional}
-\small{Desarrollador de software full-stack con formación técnica en Desarrollo de Aplicaciones Web (DAW) y especialización continua en IA y datos. Sólidas competencias en el ciclo completo de desarrollo web, combinando la implementación de interfaces de usuario atractivas y funcionales (HTML5, CSS3, JavaScript) con la lógica de negocio back-end (Java, Node.js, Python), diseño de APIs REST y bases de datos relacionales. Experiencia trabajando con metodologías ágiles por sprints, control de versiones con Git, revisiones de código y redacción de documentación técnica. Profesional con alta atención al detalle, capacidad resolutiva y de trabajo en equipo, enfocado en la mejora continua y el rendimiento de soluciones tecnológicas.}
+\small{Desarrollador Full Stack y Data Engineer con formación superior en DAW y actualmente especializándome en IA y Big Data. Tengo experiencia en la creación y despliegue de proyectos propios en producción, empleando tecnologías como Astro, Vue y Node.js, así como en la optimización de entornos e-commerce. Mi ética de trabajo se rige por los valores del deporte: la disciplina férrea y la constancia forjadas en el entrenamiento de fuerza, unidas al profundo sentido del compañerismo y trabajo en equipo que me dan el fútbol gaélico y mis años en el sector servicios. Aplico esta misma mentalidad al desarrollo de software: asumiendo el liderazgo cuando es necesario, trabajando de forma autónoma y comprometiéndome a largo plazo con el crecimiento del proyecto.}
 
-%-----------FORMACIÓN ACADÉMICA-----------
-\section{Formación Académica}
-  \resumeSubHeadingListStart
-   \resumeSubheading
-      {IES Fernando Wirtz Suárez (FP Dual en colaboración con NTT DATA)}{España}
-      {Máster de Especialización en Inteligencia Artificial y Big Data}{Actualidad}
-      \resumeItemListStart
-        \resumeItem{Especialización en arquitecturas avanzadas de datos, optimización de algoritmos, automatización y gobierno de la información.}
-      \resumeItemListEnd
-   \resumeSubheading
-      {IES San Clemente}{España}
-      {Técnico Superior en Desarrollo de Aplicaciones Web (DAW)}{2022 -- 2025}
-      \resumeItemListStart
-        \resumeItem{Formación integral en desarrollo front-end (HTML, CSS, JavaScript) y back-end (Java, persistencia y acceso a bases de datos), integración de APIs y diseño de software modular.}
-      \resumeItemListEnd
-  \resumeSubHeadingListEnd
-
-%-----------EXPERIENCIA PROFESIONAL-----------
+%-----------PROFESSIONAL EXPERIENCE-----------
 \section{Experiencia Profesional}
   \resumeSubHeadingListStart
     \resumeSubheading
       {Impulsa Dixital}{España}
-      {Desarrollador de Software (Prácticas DAW)}{Sep. 2025 -- Dic. 2025}
+      {Desarrollador FullStack (Prácticas)}{09/2025 -- 12/2025}
       \resumeItemListStart
-        \resumeItem{Desarrollo y mantenimiento de arquitecturas web full-stack modulares, integrando servicios de back-end desacoplados e interfaces interactivas preparadas para flujos de automatización.}
-        \resumeItem{Diseño, integración y optimización de APIs REST y contratos de servicios estructurados para interoperabilidad eficiente entre clientes, servicios autónomos y bases de datos.}
-        \resumeItem{Diagnóstico y resolución de incidencias complejas, optimización de latencia en servicios y aplicación rigurosa de buenas prácticas de ingeniería, testing automatizado y documentación técnica.}
-        \resumeItem{Gestión del ciclo de vida del software con Git (code reviews, branching strategies y pull requests) dentro de marcos ágiles orientados a iteraciones rápidas y entregas continuas.}
+        \resumeItem{\textbf{Contexto y Ejecución:} En lugar de limitarme a la escritura de código, audité el rendimiento de las plataformas y apliqué estrategias de optimización (WPO) en frontend y backend (PHP, JavaScript). Además, rediseñé el flujo de checkout en WooCommerce e integré nuevas pasarelas de pago.}
+        \resumeItem{\textbf{Impacto:} Logré una reducción drástica de los tiempos de carga (LCP) y la eliminación de fricciones técnicas en el proceso de compra, traduciéndose directamente en una mayor tasa de conversión y crecimiento del tráfico orgánico.}
       \resumeItemListEnd
 
     \resumeSubheading
-      {Operaciones, Logística y Entorno de Negocio}{España}
-      {Múltiples empresas (Ágora, Jevaso, Valcarce...)}{2022 -- 2026}
+      {Ágora, ES Valcarce, Hostelería}{España}
+      {Atención al Cliente y Operativa}{01/2022 -- 09/2026}
       \resumeItemListStart
-        \resumeItem{Coordinación operativa en entornos colaborativos y de alta exigencia, gestionando prioridades técnicas con autonomía, rigor analítico y enfoque en resolución de problemas.}
-        \resumeItem{Análisis y rediseño de procesos operativos para identificar cuellos de botella, traduciendo especificaciones de negocio complejas en soluciones sistemáticas y fiables.}
+        \resumeItem{Forjé una sólida cultura del esfuerzo, liderazgo inclusivo y capacidad para gestionar el estrés mediante la resolución de incidencias operativas en tiempo real frente al público, habilidades que hoy aplico al desarrollo ágil y al trabajo en equipos multidisciplinares.}
       \resumeItemListEnd
   \resumeSubHeadingListEnd
 
-%-----------PROYECTOS DESTACADOS-----------
+%-----------PROJECTS-----------
 \section{Proyectos Destacados}
 \resumeSubHeadingListStart
     \resumeProjectHeading
-        {Peliculon-es — Aplicación Web y Consumo de APIs $|$ \emph{JavaScript, HTML, CSS, API REST}}{2026}
+        {\textbf{LAITEX — Agente de IA para CVs Dinámicos} $|$ \emph{Python, Gemini API}}{2026}
         \resumeItemListStart
-          \resumeItem{Desarrollo de aplicación web orientada al consumo asíncrono de servicios externos, orquestando peticiones concurrentes y procesando respuestas estructuradas en tiempo real.}
-          \resumeItem{Implementación de pipelines de datos en cliente para filtrado dinámico, transformación de payloads complejos y renderizado reactivo de alta eficiencia.}
-          \resumeItem{Arquitectura de control de estados, resiliencia en manejo de excepciones HTTP y optimización integral de la experiencia interactiva multidispositivo.}
+          \resumeItem{\textbf{Problema y Solución:} Ante la ineficiencia de adaptar un currículum manualmente para cada oferta de empleo, desarrollé un agente en Python que procesa código fuente en LaTeX y la URL o descripción de una oferta para compilar un PDF hiper-personalizado de forma automática.}
+          \resumeItem{\textbf{Decisión Técnica:} Implementé controles de contexto estrictos en el LLM para limitar su libertad y anular alucinaciones, garantizando que el sistema cruce exclusivamente mi experiencia real con las necesidades del reclutador sin inventar datos.}
         \resumeItemListEnd
+        
     \resumeProjectHeading
-        {Galentreno — Plataforma Full Stack y Persistencia $|$ \emph{Node.js, PostgreSQL, JavaScript, Docker}}{2026}
+        {\textbf{Galentreno — Plataforma de Análisis Deportivo} $|$ \emph{Astro, Vue, Node.js, pnpm}}{2025}
         \resumeItemListStart
-          \resumeItem{Diseño e implementación de una solución full-stack orientada a servicios, estructurando la lógica de negocio en Node.js mediante endpoints modulares y flujos desacoplados.}
-          \resumeItem{Modelado de datos y administración en PostgreSQL, optimizando esquemas relacionales, indexación y consultas para flujos de alta consistencia e integridad transaccional.}
-          \resumeItem{Implementación de pruebas automatizadas, documentación exhaustiva de arquitectura y empaquetado reproducible de entornos de ejecución mediante contenedores Docker.}
+          \resumeItem{\textbf{Problema y Solución:} Para resolver la falta de seguimiento analítico eficiente en entrenamientos de fuerza, construí una plataforma full-stack orientada al registro y visualización de progreso histórico.}
+          \resumeItem{\textbf{Decisión Técnica:} Diseñé un frontend híbrido con Astro y componentes Vue para garantizar un renderizado ultrarrápido. En el backend (Node.js), opté por pnpm en lugar de npm como estándar personal para aislar dependencias, mejorar la seguridad del entorno y optimizar recursos.}
+        \resumeItemListEnd
+        
+    \resumeProjectHeading
+        {\textbf{Peliculon.es — Motor de Recomendación} $|$ \emph{JavaScript, HTML/CSS, API REST}}{2026}
+        \resumeItemListStart
+          \resumeItem{\textbf{Problema y Solución:} Diseñado para reducir la ``parálisis por análisis'' de los usuarios al enfrentarse a catálogos infinitos en servicios de streaming.}
+          \resumeItem{\textbf{Decisión Técnica:} Integré la API de TMDB en tiempo real para procesar y filtrar dinámicamente métricas de valoración y volumen de votos, entregando sugerencias precisas y eliminando la fricción en la elección de contenido.}
         \resumeItemListEnd
   \resumeSubHeadingListEnd
 
-%-----------HABILIDADES TÉCNICAS-----------
-\section{Habilidades y Tecnologías}
+%-----------EDUCATION-----------
+\section{Formación Académica}
+  \resumeSubHeadingListStart
+   \resumeSubheading
+      {IES Fernando Wirtz Suárez (Colaboración con NTT Data)}{España}
+      {Máster de Especialización en IA y Big Data (FP Dual)}{01/2026 -- Actual}
+   \resumeSubheading
+      {IES San Clemente}{España}
+      {Técnico Superior en Desarrollo de Aplicaciones Web (DAW)}{09/2022 -- 12/2025}
+  \resumeSubHeadingListEnd
+
+%-----------SKILLS & TECHNOLOGIES-----------
+\section{Habilidades Técnicas}
  \begin{itemize}[leftmargin=0.15in, label={}, itemsep=6pt, topsep=4pt]
     \small{\item{
-     \textbf{Desarrollo Front-end:} HTML5, CSS3, JavaScript (ES6+), diseño responsivo, maquetación web, consumo de APIs. \\ \vspace{2pt}
-     \textbf{Desarrollo Back-end \& APIs:} Java, Node.js, Python, diseño y optimización de APIs REST, lógica de negocio, manejo de sesiones y autenticación. \\ \vspace{2pt}
-     \textbf{Bases de Datos:} PostgreSQL, MySQL, diseño relacional, integridad referencial y optimización de consultas SQL. \\ \vspace{2pt}
-     \textbf{Control de Versiones y Metodologías:} Git (ramas, pull requests, revisión de código), metodologías ágiles (Scrum, planificación de sprints), pruebas de software, documentación y Docker. \\ \vspace{2pt}
-     \textbf{Habilidades Profesionales:} Comunicación efectiva, trabajo en equipo, capacidad analítica, gestión del tiempo y calidad del software.
+     \textbf{Lenguajes:} Python, SQL, JavaScript, TypeScript, PHP, Java, HTML/CSS. \\ \vspace{2pt}
+     \textbf{Tecnologías y Frameworks:} Pandas, Node.js, Vue, Astro, WordPress, WooCommerce. \\ \vspace{2pt}
+     \textbf{Infraestructura y Herramientas:} Docker, Linux, pnpm, Git, PostgreSQL, MySQL, Redis, MongoDB, APIs REST.
     }}
  \end{itemize}
 
-%-----------IDIOMAS-----------
-\section{Idiomas}
+%-----------LANGUAGES & OTHERS-----------
+\section{Idiomas y Otros Datos}
  \begin{itemize}[leftmargin=0.15in, label={}, itemsep=6pt, topsep=4pt]
     \small{\item{
-     Español (Nativo), Gallego (Nativo), Inglés (Avanzado - Competencia profesional para documentación técnica y especificaciones de software).
+     \textbf{Idiomas:} Español (Nativo), Gallego (Nativo), Inglés (Avanzado). \\ \vspace{2pt}
+     \textbf{Disponibilidad:} Incorporación inmediata, carnet de conducir B y vehículo propio.
     }}
  \end{itemize}
 
