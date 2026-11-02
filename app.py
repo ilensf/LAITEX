@@ -74,7 +74,7 @@ def _run_groq(prompt):
     groq_prompt = prompt + "\n\nIMPORTANT: You must return ONLY a valid JSON object with exactly two keys: 'company_name' (string) and 'full_tailored_latex' (string containing the complete LaTeX code)."
     groq_client = Groq(api_key=groq_api_key)
     completion = groq_client.chat.completions.create(
-        model="llama3-70b-8192", 
+        model="llama-3.3-70b-versatile",
         messages=[
             {"role": "system", "content": "You are an expert technical resume editor and translator. Output strictly in JSON format."},
             {"role": "user", "content": groq_prompt}
@@ -138,7 +138,7 @@ def tailor_latex_cv(tex_content, job_description, immutable_terms, progress, err
             progress.write("Sending request to Gemini (Primary)...")
             company_name_full, new_tex = _run_gemini(prompt)
         except Exception as e:
-            progress.write(f"Gemini unavailable ({e}). Falling back to Groq API (Llama 3)...")
+            progress.write(f"Gemini unavailable ({e}). Falling back to Groq API (Llama 3.3 70B)...")
             company_name_full, new_tex = _run_groq(prompt)
     else:
         try:

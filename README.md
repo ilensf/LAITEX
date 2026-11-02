@@ -1,7 +1,7 @@
 # Agente para modificar CVs Overleaf
 
 Aplicación web con Streamlit que adapta un currículum LaTeX a una oferta de
-trabajo. Puedes elegir entre **Gemini** y **Groq (Llama 3)** para personalizar
+trabajo. Puedes elegir entre **Gemini** y **Groq (Llama 3.3 70B)** para personalizar
 y, si es necesario, traducir el CV completo. El proveedor alternativo se usa
 automáticamente si falla el principal.
 
